@@ -19,4 +19,12 @@ export class UsersService {
   public async create(dto: User): Promise<User> {
     return this.repo.save(dto);
   }
+
+  async findByEmail(email: string) {
+    return await this.repo.findOne({
+      where: {
+        email: email,
+      },
+    });
+  }
 }

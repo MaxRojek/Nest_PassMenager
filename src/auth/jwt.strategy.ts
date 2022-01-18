@@ -12,10 +12,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: { userId: number }) {
+  async validate(payload: { id: number }) {
     return {
-      userId: payload.userId,
+      id: payload.id,
     };
   }
 }
-//https://levelup.gitconnected.com/how-to-create-a-nestjs-app-with-authentication-c0ae845ff6ac

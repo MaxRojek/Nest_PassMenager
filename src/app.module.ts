@@ -5,11 +5,12 @@ import { AppService } from './app.service';
 import { configService } from './config/config.service';
 import { UsersModule } from './users/users.module';
 import { SavedPassModule } from './saved-pass/saved-pass.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
-    UsersModule, SavedPassModule
+    UsersModule, SavedPassModule, AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

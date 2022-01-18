@@ -20,4 +20,5 @@ export class User {
 
   @OneToMany(() => SavedPass, savedPass => savedPass.owner)
   accounts: SavedPass[];
+
 }
