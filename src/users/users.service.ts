@@ -17,7 +17,11 @@ export class UsersService {
   }
 
   public async create(dto: User): Promise<User> {
-    return this.repo.save(dto);
+    // return this.repo.save(dto);
+    const user = User.create(dto);
+    await user.save();
+    delete user.password;
+    return user;
   }
 
   async findByEmail(email: string) {
