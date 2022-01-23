@@ -26,8 +26,15 @@ export class AuthService {
       name: user.name,
     };
 
+    const aesPayload = {
+      id: user.id,
+      name: user.name,
+      aesKey: user.aesKey
+    };
+
     return {
       access_token: this.jwtService.sign(payload),
+      key_token: this.jwtService.sign(aesPayload),
     };
   }
 

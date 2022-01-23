@@ -1,8 +1,16 @@
-const generateAesKey = (): string => {
-  var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+';
-  var result = '';
-  for (var i = 0; i < 32; i++) {
-    result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+// Random String Generator (Alpha-Numeric | Alpha | Numeric)
+
+const genAesKey = (len: number, an?: string) => {
+  an = an && an.toLowerCase();
+  var str = "",
+    i = 0,
+    min = an == "a" ? 10 : 0,
+    max = an == "n" ? 10 : 62;
+  for (; i++ < len;) {
+    var r = Math.random() * (max - min) + min << 0;
+    str += String.fromCharCode(r += r > 9 ? r < 36 ? 55 : 61 : 48);
   }
-  return result;
+  return str;
 }
+
+export default genAesKey;

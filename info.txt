@@ -1,0 +1,1 @@
+sudo chmod 666 /var/run/docker.sock use before npm run start:dev:db

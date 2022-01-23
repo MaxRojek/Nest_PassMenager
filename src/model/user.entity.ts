@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn, BeforeInsert, BaseEntity } from 'typeorm';
 import { SavedPass } from './saved-pass.entity';
 import * as bcrypt from 'bcryptjs';
+import genAesKey from '../services/aes-key-gen';
 
 @Entity()
 export class User extends BaseEntity {
@@ -32,7 +33,7 @@ export class User extends BaseEntity {
 
   @BeforeInsert()
   async generateAesKey() {
-    this.aesKey = await generateAesKey();
+    this.aesKey = await genAesKey(32);
   }
 
   async validatePassword(password: string): Promise<boolean> {
