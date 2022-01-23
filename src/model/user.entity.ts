@@ -19,12 +19,20 @@ export class User extends BaseEntity {
   @Column({ default: true })
   isActive: boolean;
 
+  @Column()
+  aesKey: string;
+
   @OneToMany(() => SavedPass, savedPass => savedPass.owner)
   accounts: SavedPass[];
 
   @BeforeInsert()
   async hashPassword() {
     this.password = await bcrypt.hash(this.password, 8);
+  }
+
+  @BeforeInsert()
+  async generateAesKey() {
+    this.aesKey = await generateAesKey();
   }
 
   async validatePassword(password: string): Promise<boolean> {
