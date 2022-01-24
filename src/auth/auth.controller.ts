@@ -1,5 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
-import { Logger } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Param, Post, UseGuards, Headers } from '@nestjs/common';
 
 import { AuthService } from './auth.service';
 import { AuthLoginDto } from './auth-login.dto';
@@ -12,7 +11,6 @@ export class AuthController {
 
   @Post('/login')
   async login(@Body() authLoginDto: AuthLoginDto) {
-    Logger.log(authLoginDto)
     return this.authService.login(authLoginDto);
   }
 
@@ -23,7 +21,17 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  async test() {
+  async test(@Headers('Authorization') auth: string) {
+    Logger.log(auth);
+    //const json = await this.jwtUtil.decode(auth);
+    //Logger.log(json);
+    //let decoded = jwt_decode(headers.authorization);
+    //Logger.log(decoded);
+    //   return res.status(401).json({
+    //     ok: false,
+    //     message: 'Invalid Token',
+    //     errors: err
+    // });
     return 'Success!';
   }
 }
