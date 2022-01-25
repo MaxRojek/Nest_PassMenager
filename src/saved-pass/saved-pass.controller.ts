@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Logger, Param, Post, UseGuards, Headers } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Param, Post, UseGuards, Headers, Delete } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { SavedPass } from '../model/saved-pass.entity';
 import { SavedPassService } from './saved-pass.service';
@@ -26,5 +26,11 @@ export class SavedPassController {
   @Get(':id')
   public async get(@Param() params): Promise<SavedPass[]> {
     return this.serv.getAllPass(params.id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete()
+  public async delete(@Body() id: number): Promise<any> {
+    return this.serv.deletePass(id);
   }
 }

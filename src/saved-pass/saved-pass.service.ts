@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SavedPass } from '../model/saved-pass.entity';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { SavedPassInterface } from 'src/types/SavedPassInterface';
 import { User } from '../model/user.entity';
 
@@ -23,5 +23,9 @@ export class SavedPassService {
 
   public async getAllPass(id: number): Promise<SavedPass[]> {
     return await this.repo.find({ where: { owner: id } });
+  }
+
+  public async deletePass(id: number): Promise<DeleteResult> {
+    return await this.repo.delete(id);
   }
 }
